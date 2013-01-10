@@ -1,3 +1,3 @@
-module NounExtractor
+class NounExtractor
   VERSION = "0.0.1"
 end

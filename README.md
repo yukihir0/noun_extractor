@@ -1,29 +1,60 @@
 # NounExtractor
 
-TODO: Write a gem description
+'noun_extractor' provides feature for japanese noun extraction from parse result of MeCab.
 
-## Installation
+## Requirements
+
+- ruby 1.9
+- [MeCab](http://code.google.com/p/mecab/)
+- [mecab-ruby](http://code.google.com/p/mecab/)
+
+## Install
+
+### MeCab
+
+Install MeCab and dictionary:
+
+```
+# at Mac
+% brew install mecab
+% brew install mecab-ipadic
+```
+
+### mecab-ruby
+
+Download mecab-ruby and install:
+
+```
+% tar xzvf mecab-ruby-###.tar.gz
+% cd mecab-ruby-###
+% ruby extract.conf
+% make
+% make install
+```
 
 Add this line to your application's Gemfile:
 
-    gem 'noun_extractor'
+```
+gem 'noun_extractor', :github => 'yukihir0/noun_extractor'
+```
 
 And then execute:
 
-    $ bundle
+```
+% bundle install
+```
 
-Or install it yourself as:
+## How to use
 
-    $ gem install noun_extractor
+```
+mecab = MeCab::Tagger.new
 
-## Usage
+extractor = NounExtractor.new(mecab)
+noun_list = extractor.analyze("こんにちは、世界。")
 
-TODO: Write usage instructions here
+puts noun_list
+```
 
-## Contributing
+## License
 
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+Copyright &copy; 2013 yukihir0
