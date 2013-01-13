@@ -4,9 +4,9 @@ require 'MeCab'
 class NounExtractor
 
     # extract mode
-    SINGLE_NOUN_MODE   = 'single'
-    COMPOUND_NOUN_MODE = 'compound'
-    MODE = [SINGLE_NOUN_MODE, COMPOUND_NOUN_MODE]
+    SINGLE_NOUN   = 'single'
+    COMPOUND_NOUN = 'compound'
+    EXTRACT_MODE  = [SINGLE_NOUN, COMPOUND_NOUN]
   
     # exception message
     INVALID_MODE_ERROR       = 'invalid mode'
@@ -17,39 +17,38 @@ class NounExtractor
     end
 
     def mode=(_mode)
-        if MODE.member?(_mode)
+        if EXTRACT_MODE.member?(_mode)
             @mode = _mode
         else
             raise INVALID_MODE_ERROR
         end
     end
 
-    def initialize(mecab, mode=SINGLE_NOUN_MODE)
+    def initialize(mecab, options = { mode: SINGLE_NOUN })
         if mecab.instance_of?(MeCab::Tagger)
             @mecab = mecab
+            self.mode = options[:mode]
         else
             raise NOT_MECAB_INSTANCE_ERROR
         end
-
-        self.mode = mode
     end
 
     def analyze(doc)
-        noun_list = Array.new
+        @result = Array.new
 
         unless doc.nil?
             # parse doc by mecab
             node = @mecab.parseToNode(doc)
             
             case @mode
-            when SINGLE_NOUN_MODE
-                noun_list = analyze_single(node)
-            when COMPOUND_NOUN_MODE
-                noun_list = analyze_compound(node)
+            when SINGLE_NOUN
+                analyze_single(node)
+            when COMPOUND_NOUN
+                analyze_compound(node)
             end
         end
 
-        return noun_list
+        return @result
     end
 
     private
@@ -61,42 +60,32 @@ class NounExtractor
         /^名詞/ =~ node_feature[0] && /^一般/ =~ node_feature[1]
     end
 
-    def extract_surface(node)
+    def get_surface(node)
         node.surface.force_encoding('utf-8')
     end
     
     def analyze_single(node)
-        noun_list = Array.new
-        
         while node
-            # extract noun
-            if is_noun?(node)
-                noun_list << extract_surface(node)
-            end
+            @result << get_surface(node) if is_noun?(node)
             node = node.next
         end
-
-        return noun_list
     end
 
     def analyze_compound(node)
-        noun_list = Array.new
         compound_noun = "" 
         
         while node
-            # extract noun
             if is_noun?(node)
-                compound_noun << extract_surface(node)
+                # make compound noun
+                compound_noun << get_surface(node)
             else
-                # add compound noun to list
                 unless compound_noun.empty?
-                    noun_list << compound_noun
+                    # add compound noun to result
+                    @result << compound_noun
                     compound_noun = ''
                 end
             end
             node = node.next
         end
- 
-        return noun_list
     end
 end

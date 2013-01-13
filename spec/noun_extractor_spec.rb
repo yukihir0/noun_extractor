@@ -5,25 +5,38 @@ describe NounExtractor do
     before do
         @mecab = MeCab::Tagger.new
     end
-    
-    context 'when SINGLE_NOUN_MODE' do
+
+    context 'when no option (mode: SINGLE_NOUN)' do
         before do
-            @extractor = NounExtractor.new(@mecab, NounExtractor::SINGLE_NOUN_MODE)
+            @extractor = NounExtractor.new(@mecab)
         end
 
         describe '#attr_reader noun' do
             context 'get' do
-                it 'should be SINGLE_NOUN_MODE' do
-                    @extractor.mode.should == NounExtractor::SINGLE_NOUN_MODE
+                it 'should be SINGLE_NOUN' do
+                    @extractor.mode.should == NounExtractor::SINGLE_NOUN 
+                end
+            end
+        end
+    end
+    context 'when SINGLE_NOUN' do
+        before do
+            @extractor = NounExtractor.new(@mecab, mode: NounExtractor::SINGLE_NOUN)
+        end
+
+        describe '#attr_reader noun' do
+            context 'get' do
+                it 'should be SINGLE_NOUN' do
+                    @extractor.mode.should == NounExtractor::SINGLE_NOUN
                 end
             end
         end
 
         describe '#attr_writer noun' do
-            context 'set COMPUND_NOUN_MODE' do
-                it 'should be COMPOUND_MODE' do
-                    @extractor.mode = NounExtractor::COMPOUND_NOUN_MODE
-                    @extractor.mode.should == NounExtractor::COMPOUND_NOUN_MODE
+            context 'set COMPUND_NOUN' do
+                it 'should be COMPOUND' do
+                    @extractor.mode = NounExtractor::COMPOUND_NOUN
+                    @extractor.mode.should == NounExtractor::COMPOUND_NOUN
                 end
             end
         end
@@ -31,7 +44,7 @@ describe NounExtractor do
         describe '#analyze' do
             context 'nil input' do
                 it 'should be no noun' do
-                        noun_list = @extractor.analyze(nil)
+                    noun_list = @extractor.analyze(nil)
                     noun_list.size.should == 0
                 end
             end
@@ -69,24 +82,24 @@ describe NounExtractor do
         end
     end
 
-    context 'when COMPUND_NOUN_MODE' do
+    context 'when COMPUND_NOUN' do
         before do
-            @extractor = NounExtractor.new(@mecab, NounExtractor::COMPOUND_NOUN_MODE)
+            @extractor = NounExtractor.new(@mecab, mode: NounExtractor::COMPOUND_NOUN)
         end
 
         describe '#attr_reader noun' do
             context 'get' do
-                it 'should be COMPUND_NOUN_MODE' do
-                    @extractor.mode.should == NounExtractor::COMPOUND_NOUN_MODE
+                it 'should be COMPUND_NOUN' do
+                    @extractor.mode.should == NounExtractor::COMPOUND_NOUN
                 end
             end
         end
 
         describe '#attr_writer noun' do
-            context 'set SINGLE_NOUN_MODE' do
-                it 'should be SINGLE_MODE' do
-                    @extractor.mode = NounExtractor::SINGLE_NOUN_MODE
-                    @extractor.mode.should == NounExtractor::SINGLE_NOUN_MODE
+            context 'set SINGLE_NOUN' do
+                it 'should be SINGLE_NOUN' do
+                    @extractor.mode = NounExtractor::SINGLE_NOUN
+                    @extractor.mode.should == NounExtractor::SINGLE_NOUN
                 end
             end
         end
