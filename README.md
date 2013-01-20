@@ -55,6 +55,8 @@ noun_list = extractor.analyze("こんにちは、世界。")
 puts noun_list
 ```
 
+For more information, please see [here](https://github.com/yukihir0/noun_extractor/blob/master/sample/main.rb).
+
 ## License
 
 Copyright &copy; 2013 yukihir0
