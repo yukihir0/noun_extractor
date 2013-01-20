@@ -9,8 +9,8 @@ class NounExtractor
     EXTRACT_MODE  = [SINGLE_NOUN, COMPOUND_NOUN]
   
     # exception message
-    INVALID_MODE_ERROR       = 'invalid mode'
-    NOT_MECAB_INSTANCE_ERROR = 'not mecab instance'
+    INVALID_MODE_ERROR       = 'RuntimeError: invalid mode'
+    NOT_MECAB_INSTANCE_ERROR = 'RuntimeError: not mecab instance'
 
     def mode
         @mode
