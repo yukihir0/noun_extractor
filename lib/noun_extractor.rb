@@ -4,6 +4,7 @@ require 'analyzer/single_analyzer'
 require 'analyzer/compound_analyzer'
 
 class NounExtractor
+    include NounExtractorAnalyzer
 
     # exception message
     NOT_MECAB_INSTANCE_ERROR = 'not an instance of mecab'
