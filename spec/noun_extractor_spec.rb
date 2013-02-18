@@ -4,31 +4,9 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 describe NounExtractor do
     context 'uninitialized' do
         describe '#initialize' do
-            context 'when nil input' do
-                it 'raise error' do
-                    expect { extractor = NounExtractor.new(nil)
-                    }.to raise_error(RuntimeError, NounExtractor::NOT_MECAB_INSTANCE_ERROR)
-                end
-            end
-
-            context 'when null string input' do
-                it 'raise error' do
-                    expect { extractor = NounExtractor.new('')
-                    }.to raise_error(RuntimeError, NounExtractor::NOT_MECAB_INSTANCE_ERROR)
-                end
-            end
-
-            context 'when not mecab instance input' do
-                it 'raise error' do
-                    expect { extractor = NounExtractor.new('mecab')
-                    }.to raise_error(RuntimeError, NounExtractor::NOT_MECAB_INSTANCE_ERROR)
-                end
-            end
-
-            context 'when mecab instance input' do
+            context 'when call' do
                 it 'SingleAnalyzer' do
-                    mecab = MeCab::Tagger.new
-                    extractor = NounExtractor.new(mecab)
+                    extractor = NounExtractor.new
                     extractor.instance_eval('@analyzer').instance_of?(SingleAnalyzer).should be_true
                 end
             end
@@ -37,8 +15,7 @@ describe NounExtractor do
 
     context 'initialized' do
         before(:each) do
-            mecab = MeCab::Tagger.new
-            @extractor = NounExtractor.new(mecab)
+            @extractor = NounExtractor.new
         end
 
         describe '#to_single' do
@@ -61,7 +38,7 @@ describe NounExtractor do
 
         describe '#analyze' do
             context 'when call' do
-                it 'call analyzer #analyze' do
+                it 'call analyzer#analyze' do
                     doc = 'test doc'
 
                     analyzer = mock('analyzer')

@@ -6,15 +6,14 @@ describe CompoundAnalyzer do
     context 'initialized' do
         describe '#do_analyze' do
             context 'when node input' do
-                it 'single noun_list' do
-                    doc = '機械制御'
-                    expected = ['機械制御']
-
-                    mecab = MeCab::Tagger.new
-                    analyzer = CompoundAnalyzer.new(mecab)
-
-                    noun_list = analyzer.analyze(doc)
-                    noun_list.should == expected
+                it 'call node#feature, node#next' do
+                    analyzer = CompoundAnalyzer.new
+                    
+                    node = mock('node')
+                    node.should_receive(:feature).and_return('test_node')
+                    node.should_receive(:next)
+                    
+                    analyzer.send(:do_analyze, node)
                 end
             end
         end

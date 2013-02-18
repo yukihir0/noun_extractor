@@ -47,9 +47,7 @@ And then execute:
 ## How to use
 
 ```
-mecab = MeCab::Tagger.new
-
-extractor = NounExtractor.new(mecab)
+extractor = NounExtractor.new
 noun_list = extractor.analyze("こんにちは、世界。")
 
 puts noun_list

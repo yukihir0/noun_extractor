@@ -1,16 +1,14 @@
 # coding: utf-8
+require 'MeCab'
 
 module Analyzer
     class BaseAnalyzer
 
         ENCODING = 'utf-8'
 
-        # exception message
-        ABSTRACT_METHOD_CALL_ERROR = 'abstract method called'
-
         public
-        def initialize(mecab)
-            @mecab = mecab
+        def initialize
+            @mecab = MeCab::Tagger.new
         end
         
         def analyze(doc)
@@ -24,7 +22,6 @@ module Analyzer
 
         protected
         def do_analyze(node)
-            raise ABSTRACT_METHOD_CALL_ERROR
         end
 
         private

@@ -5,8 +5,7 @@ include Analyzer
 describe BaseAnalyzer do
     context 'initialized' do
         before(:each) do
-            mecab = MeCab::Tagger.new
-            @analyzer = BaseAnalyzer.new(mecab)
+            @analyzer = BaseAnalyzer.new
         end
 
         describe '#analyze' do
@@ -25,10 +24,53 @@ describe BaseAnalyzer do
             end
 
             context 'when doc input' do
-                it 'raise error' do
+                it 'call mecab#parseToNode' do
+                    mecab = mock('mecab')
+                    mecab.should_receive(:parseToNode)
+                    @analyzer.instance_variable_set('@mecab', mecab)
+
                     doc = 'hoge fuga'
-                    expect { noun_list = @analyzer.analyze(doc)
-                    }.to raise_error(RuntimeError, BaseAnalyzer::ABSTRACT_METHOD_CALL_ERROR)
+                    @analyzer.analyze(doc)
+                end
+            end
+        end
+
+        describe '#is_noun?' do
+            context 'when not noun node input' do
+                it 'false' do
+                    node = mock('node')
+                    node.should_receive(:feature).and_return('動詞,一般')
+                    
+                    @analyzer.send(:is_noun?, node).should be_false
+                end
+            end
+
+            context 'when not general node input' do
+                it 'false' do
+                    node = mock('node')
+                    node.should_receive(:feature).and_return('名詞,複合')
+                    
+                    @analyzer.send(:is_noun?, node).should be_false
+                end
+            end
+
+            context 'when general noun node input' do
+                it 'true' do
+                    node = mock('node')
+                    node.should_receive(:feature).and_return('名詞,一般')
+                    
+                    @analyzer.send(:is_noun?, node).should be_true
+                end
+            end
+        end
+
+        describe '#get_surface' do
+            context 'when node input' do
+                it 'surface' do
+                    node = mock('node')
+                    node.should_receive(:surface).and_return('surface_test')
+
+                    @analyzer.send(:get_surface, node).should == 'surface_test'
                 end
             end
         end
