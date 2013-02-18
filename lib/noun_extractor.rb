@@ -1,10 +1,11 @@
 # coding: utf-8
+require "noun_extractor/version"
+require 'noun_extractor/analyzer/single_analyzer'
+require 'noun_extractor/analyzer/compound_analyzer'
 require 'MeCab'
-require 'analyzer/single_analyzer'
-require 'analyzer/compound_analyzer'
 
 class NounExtractor
-    include NounExtractorAnalyzer
+    include Analyzer
 
     # exception message
     NOT_MECAB_INSTANCE_ERROR = 'not an instance of mecab'

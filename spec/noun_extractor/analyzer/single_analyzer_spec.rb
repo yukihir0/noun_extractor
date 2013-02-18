@@ -1,6 +1,6 @@
 # coding: utf-8
 require File.expand_path('spec/spec_helper')
-include NounExtractorAnalyzer
+include Analyzer
 
 describe SingleAnalyzer do
     context 'initialized' do

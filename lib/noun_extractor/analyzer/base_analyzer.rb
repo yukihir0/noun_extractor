@@ -1,6 +1,6 @@
 # coding: utf-8
 
-module NounExtractorAnalyzer
+module Analyzer
     class BaseAnalyzer
 
         ENCODING = 'utf-8'
