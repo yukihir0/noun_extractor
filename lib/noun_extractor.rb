@@ -4,7 +4,7 @@ require 'noun_extractor/analyzer/single_analyzer'
 require 'noun_extractor/analyzer/compound_analyzer'
 
 class NounExtractor
-    include Analyzer
+    include NounExtractorAnalyzer
 
     def initialize
         to_single

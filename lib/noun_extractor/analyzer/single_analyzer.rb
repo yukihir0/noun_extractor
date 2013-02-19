@@ -1,7 +1,7 @@
 # coding: utf-8
 require 'noun_extractor/analyzer/base_analyzer'
 
-module Analyzer
+module NounExtractorAnalyzer
     class SingleAnalyzer < BaseAnalyzer
         def do_analyze(node)
             result = Array.new

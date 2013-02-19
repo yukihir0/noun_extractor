@@ -1,7 +1,7 @@
 # coding: utf-8
 require 'noun_extractor/analyzer/base_analyzer'
 
-module Analyzer
+module NounExtractorAnalyzer
     class CompoundAnalyzer < BaseAnalyzer
         def do_analyze(node)
             compound_noun = ''

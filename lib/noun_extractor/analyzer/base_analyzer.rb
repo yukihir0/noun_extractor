@@ -1,7 +1,7 @@
 # coding: utf-8
 require 'MeCab'
 
-module Analyzer
+module NounExtractorAnalyzer
     class BaseAnalyzer
 
         ENCODING = 'utf-8'
