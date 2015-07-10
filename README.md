@@ -4,7 +4,7 @@
 
 ## Requirements
 
-- ruby 1.9
+- ruby >= 2.0
 - [MeCab](http://code.google.com/p/mecab/)
 - [mecab gem](https://rubygems.org/gems/mecab)
 
