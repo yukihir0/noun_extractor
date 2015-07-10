@@ -2,12 +2,12 @@
 require 'noun_extractor'
 
 def print_noun_list(mode, noun_list)
-    header = "--- #{mode} ---"
-    footer = '-'*header.length, ''
+  header = "--- #{mode} ---"
+  footer = '-'*header.length, ''
 
-    puts header
-    puts noun_list
-    puts footer
+  puts header
+  puts noun_list
+  puts footer
 end
 
 
