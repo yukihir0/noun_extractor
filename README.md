@@ -1,4 +1,4 @@
-# NounExtractor
+# NounExtractor [![Build Status](https://travis-ci.org/yukihir0/noun_extractor.svg?branch=master)](https://travis-ci.org/yukihir0/noun_extractor)
 
 'noun_extractor' provides feature for japanese noun extraction from parse result of MeCab.
 
