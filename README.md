@@ -6,7 +6,7 @@
 
 - ruby 1.9
 - [MeCab](http://code.google.com/p/mecab/)
-- [mecab-ruby](http://code.google.com/p/mecab/)
+- [mecab gem](https://rubygems.org/gems/mecab)
 
 ## Install
 
@@ -18,18 +18,6 @@ Install MeCab and dictionary:
 # at Mac
 % brew install mecab
 % brew install mecab-ipadic
-```
-
-### mecab-ruby
-
-Download mecab-ruby and install:
-
-```
-% tar xzvf mecab-ruby-###.tar.gz
-% cd mecab-ruby-###
-% ruby extract.conf
-% make
-% make install
 ```
 
 Add this line to your application's Gemfile:

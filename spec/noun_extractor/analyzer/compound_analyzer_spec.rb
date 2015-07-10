@@ -9,7 +9,7 @@ describe CompoundAnalyzer do
                 it 'call node#feature, node#next' do
                     analyzer = CompoundAnalyzer.new
                     
-                    node = mock('node')
+                    node = double('node')
                     node.should_receive(:feature).and_return('test_node')
                     node.should_receive(:next)
                     

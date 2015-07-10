@@ -25,7 +25,7 @@ describe BaseAnalyzer do
 
             context 'when doc input' do
                 it 'call mecab#parseToNode' do
-                    mecab = mock('mecab')
+                    mecab = double('mecab')
                     mecab.should_receive(:parseToNode)
                     @analyzer.instance_variable_set('@mecab', mecab)
 
@@ -38,28 +38,28 @@ describe BaseAnalyzer do
         describe '#is_noun?' do
             context 'when not noun node input' do
                 it 'false' do
-                    node = mock('node')
+                    node = double('node')
                     node.should_receive(:feature).and_return('動詞,一般')
                     
-                    @analyzer.send(:is_noun?, node).should be_false
+                    @analyzer.send(:is_noun?, node).should be_falsey
                 end
             end
 
             context 'when not general node input' do
                 it 'false' do
-                    node = mock('node')
+                    node = double('node')
                     node.should_receive(:feature).and_return('名詞,複合')
                     
-                    @analyzer.send(:is_noun?, node).should be_false
+                    @analyzer.send(:is_noun?, node).should be_falsey
                 end
             end
 
             context 'when general noun node input' do
                 it 'true' do
-                    node = mock('node')
+                    node = double('node')
                     node.should_receive(:feature).and_return('名詞,一般')
                     
-                    @analyzer.send(:is_noun?, node).should be_true
+                    @analyzer.send(:is_noun?, node).should be_truthy
                 end
             end
         end
@@ -67,7 +67,7 @@ describe BaseAnalyzer do
         describe '#get_surface' do
             context 'when node input' do
                 it 'surface' do
-                    node = mock('node')
+                    node = double('node')
                     node.should_receive(:surface).and_return('surface_test')
 
                     @analyzer.send(:get_surface, node).should == 'surface_test'

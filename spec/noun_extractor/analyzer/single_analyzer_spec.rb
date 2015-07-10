@@ -9,7 +9,7 @@ describe SingleAnalyzer do
                 it 'call node#feature, node#next' do
                     analyzer = SingleAnalyzer.new
                     
-                    node = mock('node')
+                    node = double('node')
                     node.should_receive(:feature).and_return('test_node')
                     node.should_receive(:next)
 

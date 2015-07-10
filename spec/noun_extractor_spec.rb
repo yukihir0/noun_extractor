@@ -7,7 +7,7 @@ describe NounExtractor do
             context 'when call' do
                 it 'SingleAnalyzer' do
                     extractor = NounExtractor.new
-                    extractor.instance_eval('@analyzer').instance_of?(SingleAnalyzer).should be_true
+                    extractor.instance_eval('@analyzer').instance_of?(SingleAnalyzer).should be_truthy
                 end
             end
         end
@@ -22,7 +22,7 @@ describe NounExtractor do
             context 'when call' do
                 it 'SingleAnalyzer' do
                     @extractor.to_single
-                    @extractor.instance_eval('@analyzer').instance_of?(SingleAnalyzer).should be_true
+                    @extractor.instance_eval('@analyzer').instance_of?(SingleAnalyzer).should be_truthy
                 end
             end
         end
@@ -31,7 +31,7 @@ describe NounExtractor do
             context 'when call' do
                 it 'CompoundAnalyzer' do
                     @extractor.to_compound
-                    @extractor.instance_eval('@analyzer').instance_of?(CompoundAnalyzer).should be_true
+                    @extractor.instance_eval('@analyzer').instance_of?(CompoundAnalyzer).should be_truthy
                 end
             end
         end
@@ -41,7 +41,7 @@ describe NounExtractor do
                 it 'call analyzer#analyze' do
                     doc = 'test doc'
 
-                    analyzer = mock('analyzer')
+                    analyzer = double('analyzer')
                     analyzer.should_receive(:analyze).with(doc)
                     @extractor.instance_variable_set(:@analyzer, analyzer)
 
